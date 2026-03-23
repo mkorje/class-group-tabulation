@@ -133,7 +133,7 @@ int next(group_pow_t * gp, form_t * R, const int init_pow, int prime_index)
 }
 
 // uses Olivier Ramare's upper bounds on L(1,x)
-int h_upper_bound(const long D)
+long h_upper_bound(const long D)
 {
 	double E;
 	if ((D & 3) == 0)
