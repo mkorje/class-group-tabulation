@@ -331,7 +331,6 @@ void mpz_primorial_range(
   mpz_set_ui(primorial, 1);
   mpz_set_ui(phi, 1);
   while (mpz_cmp_ui(p, j) <= 0) {
-    gmp_printf("%Zd\n", p);
     mpz_sub_ui(t, p, 1);
     mpz_mul(primorial, primorial, p);
     mpz_mul(phi, phi, t);
