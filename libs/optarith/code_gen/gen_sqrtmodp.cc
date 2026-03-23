@@ -67,26 +67,31 @@ int main(int argc, char** argv) {
   fh << "extern const int sqrtmodp_maxp;" << endl;
   fh << endl;
 	
-  for (unsigned int prime_index = 0; prime_list[prime_index] <= max_p;  prime_index ++) {
+  for (unsigned int prime_index = 0; prime_index < prime_list_count && prime_list[prime_index] <= max_p;  prime_index ++) {
     unsigned int p = prime_list[prime_index];
     fh << "extern const int sqrtmod_" << p << "[];" << endl;
     fc << "const int sqrtmod_" << p << "[] = {" << endl;
     fc << "  ";
     new_para();
-    print_elem(fc, 0);
-    for (unsigned int s = 1;  s < p;  s ++) {
-      // search for the sqrt mod p of s
-      bool has_root = false;
-      for (unsigned int r = 1;  r < p;  r ++) {
-	if (r*r % p == s) {
-	  print_elem(fc, r);
-	  has_root = true;
-	  break;
-	}
-      }
 
-      if (!has_root) print_elem(fc, -1);
+    int* sqrt_table = new int[p];
+    sqrt_table[0] = 0;
+    for (unsigned int i = 1; i < p; i++) {
+      sqrt_table[i] = -1;
     }
+
+    for (unsigned int r = 1; r < p; r++) {
+      unsigned int s = ((unsigned long long) r * r) %p;
+      if (sqrt_table[s] == -1) {
+        sqrt_table[s] = r;
+      }
+    }
+
+    for (unsigned int s = 0; s < p; s++) {
+      print_elem(fc, sqrt_table[s]);
+    }
+    delete[] sqrt_table;
+
     fc << "\n};\n";
     fc << endl;
   }
@@ -96,7 +101,7 @@ int main(int argc, char** argv) {
   fc << "const int* sqrtmodp[] = {\n  ";
   unsigned int i = 0;
   new_para();
-  for (unsigned int prime_index = 0;  prime_list[prime_index] <= max_p;  prime_index ++) {
+  for (unsigned int prime_index = 0; prime_index < prime_list_count && prime_list[prime_index] <= max_p;  prime_index ++) {
     unsigned int p = prime_list[prime_index];
     while (i < p) {
       print_elem(fc, 0);
