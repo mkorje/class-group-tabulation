@@ -604,7 +604,18 @@ void mpz_qform_cube(mpz_qform_group_t* group, mpz_qform_t* R, const mpz_qform_t*
     mpz_sub(comp->temp, comp->temp, comp->T);
     
     mpz_gcdext(comp->S, comp->u2, comp->v2, comp->SP, comp->temp);
-    
+
+    // NUCUBE can fail for non-fundamental discriminants.
+    if (mpz_divisible_p(A->a, comp->S) == 0) {
+      // Fall back to square-and-multiply.
+      mpz_qform_t tmp;
+      mpz_qform_init(group, &tmp);
+      mpz_qform_square(group, &tmp, A);
+      mpz_qform_compose(group, R, &tmp, A);
+      mpz_qform_clear(group, &tmp);
+      return;
+    }
+
     // N = a/S
     mpz_divexact(comp->N, A->a, comp->S);
     
