@@ -9,10 +9,10 @@
 
 #include <stdint.h>
 
-/// The number 10000.
+/// The number 78498.
 extern unsigned int prime_list_count;
 
-/// A list of the first 10000 primes.
+/// A list of the first 78498 primes (up to 999983).
 extern unsigned int prime_list[];
 
 /// Returns the index of the smallest prime >= n
