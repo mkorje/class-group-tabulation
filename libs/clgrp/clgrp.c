@@ -633,12 +633,12 @@ printf(" to Q\n");
 		exit(1);
 	}
 
+	group_pow_clear(&gp);
+	s64_qform_group_clear(&group);
+
 	if (h != 1)
 	{
 		rank = j;
-
-		group_pow_clear(&gp);
-		s64_qform_group_clear(&group);
 
 #ifdef DEBUG
 printf("ANSWER:\n");
