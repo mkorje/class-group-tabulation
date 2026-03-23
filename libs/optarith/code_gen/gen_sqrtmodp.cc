@@ -63,14 +63,14 @@ int main(int argc, char** argv) {
   fh << "#ifndef SQRTMODP_LIST__INCLUDED" << endl;
   fh << "#define SQRTMODP_LIST__INCLUDED" << endl;
   fh << endl;
-  fh << "extern const short* sqrtmodp[];" << endl;
+  fh << "extern const int* sqrtmodp[];" << endl;
   fh << "extern const int sqrtmodp_maxp;" << endl;
   fh << endl;
 	
   for (unsigned int prime_index = 0; prime_list[prime_index] <= max_p;  prime_index ++) {
     unsigned int p = prime_list[prime_index];
-    fh << "extern const short sqrtmod_" << p << "[];" << endl;
-    fc << "const short sqrtmod_" << p << "[] = {" << endl;
+    fh << "extern const int sqrtmod_" << p << "[];" << endl;
+    fc << "const int sqrtmod_" << p << "[] = {" << endl;
     fc << "  ";
     new_para();
     print_elem(fc, 0);
@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
 
   // reference table
   fc << "const int sqrtmodp_maxp = " << max_p << ";" << endl;
-  fc << "const short* sqrtmodp[] = {\n  ";
+  fc << "const int* sqrtmodp[] = {\n  ";
   unsigned int i = 0;
   new_para();
   for (unsigned int prime_index = 0;  prime_list[prime_index] <= max_p;  prime_index ++) {
