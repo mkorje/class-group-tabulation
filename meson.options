@@ -1,0 +1,14 @@
+option(
+    'with_pari',
+    type: 'boolean',
+    value: false,
+    description: 'Enable PARI support',
+)
+
+option(
+    'sqrtmodp_maxp',
+    type: 'integer',
+    value: 104729,
+    min: 2,
+    description: 'Generate sqrtmodp tables up to this prime',
+)
