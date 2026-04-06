@@ -47,18 +47,29 @@ void print_elem(ofstream& f, T i) {
 }
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    cout << "Usage: " << argv[0] << " max_prime" << endl;
+  if (argc != 2 && argc != 4) {
+    cout << "Usage: " << argv[0] << " max_prime [output_c output_h]" << endl;
     cout << endl;
     return 0;
   }
   max_p = atoi(argv[1]);
 
-  cout << "Generating sqrtmodp_list.c and sqrtmodp_list.h" << endl;
+  string output_c = "sqrtmodp_list.c";
+  string output_h = "sqrtmodp_list.h";
+  if (argc == 4) {
+    output_c = argv[2];
+    output_h = argv[3];
+  }
+
+  cout << "Generating " << output_c << " and " << output_h << endl;
 	
   ofstream fc, fh;
-  fc.open("sqrtmodp_list.c");
-  fh.open("sqrtmodp_list.h");
+  fc.open(output_c.c_str());
+  fh.open(output_h.c_str());
+  if (!fc.is_open() || !fh.is_open()) {
+    cerr << "Unable to open output files." << endl;
+    return 1;
+  }
   fh << "#pragma once" << endl;
   fh << "#ifndef SQRTMODP_LIST__INCLUDED" << endl;
   fh << "#define SQRTMODP_LIST__INCLUDED" << endl;
@@ -125,4 +136,3 @@ int main(int argc, char** argv) {
   fh.close();
   return 0;
 }
-
