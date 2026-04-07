@@ -30,7 +30,7 @@
 
 #include "functions.h"
 
-#define MAX_RANK 10
+#define MAX_RANK 20
 
 
 // FORM
