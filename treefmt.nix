@@ -17,4 +17,8 @@
   programs.shellcheck.enable = true;
 
   programs.typstyle.enable = true;
+
+  programs.typos.enable = true;
+  programs.mdformat.enable = true;
+  programs.mdformat.plugins = ps: [ ps.mdformat-myst ];
 }
